@@ -39,6 +39,7 @@ public class SubwayMockDataCreater {
         StationDto stationDto = new StationDto();
         stationDto.setStationId((long) 1001000134);
         stationDto.setStationName("서울");
+        stationDto.setSubwayLineId((long) 1001);
         stationDto.setLatitude(37.55315);
         stationDto.setLongitude(126.972533);
         return stationDto;

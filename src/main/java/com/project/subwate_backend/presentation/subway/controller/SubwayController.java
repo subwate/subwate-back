@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.subwate_backend.common.dto.ResponseDto;
 import com.project.subwate_backend.presentation.subway.dto.SubwayDto;
+import com.project.subwate_backend.presentation.subway.dto.SubwayLineDto;
 import com.project.subwate_backend.presentation.subway.dto.response.GetSubwayByStationResponseDto;
 import com.project.subwate_backend.presentation.subway.mock.SubwayMockDataCreater;
 
@@ -15,13 +16,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+
 @RestController
 @Tag(name = "subway")
 @RequestMapping("/api/v1/subway")
 public class SubwayController {
 
     @Operation(summary = "탑승하고 있는 지하철 정보 확인")
-    @GetMapping("/location")
+    @GetMapping("/current")
     public ResponseDto<SubwayDto> getCurrentSubwayLocation() {
 
         SubwayDto subway = SubwayMockDataCreater.createMockSubway();
@@ -44,4 +46,13 @@ public class SubwayController {
 
         return ResponseDto.of(HttpStatus.OK, "지하철 위치 조회에 성공하였습니다.", responseDto);
     }
+
+    @Operation(summary = "지하철 호선 조회")
+    @GetMapping("/line/{subwayLineId}")
+    public ResponseDto<SubwayLineDto> getSubwayLine(@PathVariable Long subwayLineId) {
+
+        SubwayLineDto subwayLine = new SubwayLineDto((long) 1001, "2호선");
+        return ResponseDto.of(HttpStatus.OK, "지하철 호선 조회에 성공하였습니다.", subwayLine);
+    }
+    
 }

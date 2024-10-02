@@ -1,7 +1,9 @@
 package com.project.subwate_backend.presentation.subway.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class SubwayLineDto {
     
     @Schema(description = "호선Id", example = "1001")

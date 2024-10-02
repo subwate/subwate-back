@@ -29,6 +29,7 @@ public class StationDto {
         StationDto station = new StationDto();
         station.setStationId(stationId);
         station.setStationName("서울");
+        station.setSubwayLineId((long) 1001);
         station.setLatitude(37.55315);
         station.setLongitude(126.972533);
         return station;

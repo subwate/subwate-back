@@ -2,6 +2,7 @@ package com.project.subwate_backend.presentation.subway.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,5 +29,15 @@ public class StationController {
         StationDto station = SubwayMockDataCreater.createMockStation();
 
         return ResponseDto.of(HttpStatus.OK, "가장 가까운 지하철 역 조회에 성공했습니다.", station);
+    }
+
+    @Operation(summary = "역 조회")
+    @GetMapping("/{stationId}")
+    public ResponseDto<StationDto> getStation(
+            @Parameter(description = "역Id}") @PathVariable Long stationId) {
+
+        StationDto station = SubwayMockDataCreater.createMockStation();
+
+        return ResponseDto.of(HttpStatus.OK, "지하철 역 조회에 성공했습니다.", station);
     }
 }
