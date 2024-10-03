@@ -6,12 +6,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/api/v1/me")
+
+@RestController
+@RequestMapping("/api/v1/me")
 public class UserManage {
 
     @Operation(summary = "유저 프로필 정보 조회", description = "[JWT 토큰 헤더 필요] 인증이 완료 된 유저의 JWT 토큰 내부의 userId를 통한 유저 정보를 조회",
