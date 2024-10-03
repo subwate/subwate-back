@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@RestController("/api/v1/post")
+@RestController
+@RequestMapping("/api/v1/post")
 public class PostController {
 
     @Operation(summary = "게시물 리스트 조회", description = "조건에 따른 게시물 리스트 조회한다.",
@@ -45,7 +46,7 @@ public class PostController {
                     @ApiResponse(responseCode = "400", description = "잘못된 요청입니다."),
                     @ApiResponse(responseCode = "500", description = "서버 오류가 발생했습니다.")
             })
-    @GetMapping("")
+    @GetMapping()
     public ResponseDto<PostDto> getPost(@Parameter(description = "조회 할 게시물 id", required = true) @RequestParam Long postId) {
         return ResponseDto.of(HttpStatus.OK, "게시물 조회에 성공했습니다.", new PostDto());
     }
