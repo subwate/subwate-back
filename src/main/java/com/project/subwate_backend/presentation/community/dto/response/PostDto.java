@@ -11,7 +11,6 @@ import java.util.List;
 
 @Data
 @Schema(description = "게시물 내용 클래스")
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class PostDto {
     Long contentId;
     Date createdAt;

@@ -9,7 +9,6 @@ import java.util.Date;
 
 @Data
 @Schema(description = "게시물 댓글의 대댓글 클래스")
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ReplyDto {
     Long replyId;
     Date createAt;

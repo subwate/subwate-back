@@ -16,7 +16,7 @@ public class UserManage {
 
     @Operation(summary = "유저 프로필 정보 조회", description = "[JWT 토큰 헤더 필요] 인증이 완료 된 유저의 JWT 토큰 내부의 userId를 통한 유저 정보를 조회",
             security = @SecurityRequirement(name = "bearerAuth"))
-    @GetMapping
+    @GetMapping("")
     public ResponseDto<UserInfo> getUserInfo() {
         return ResponseDto.of(HttpStatus.OK, "유저 정보 조회에 성공했습니다.", new UserInfo());
     }

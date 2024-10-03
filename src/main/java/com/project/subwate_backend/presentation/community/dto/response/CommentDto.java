@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Schema(description = "게시물 댓글 클래스")
 public class CommentDto {
     Long commentId;
