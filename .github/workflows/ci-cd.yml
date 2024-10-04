@@ -49,7 +49,7 @@ jobs:
           echo "${SSH_PRIVATE_KEY}" > /tmp/ssh_key
           chmod 600 /tmp/ssh_key
 
-          ssh -i /tmp/ssh_key -o StrictHostKeyChecking=no ubuntu@52.79.216.149 \
+          ssh -i /tmp/ssh_key -o StrictHostKeyChecking=no ubuntu@43.200.133.172 \
             "docker pull subwate/spring-app:latest && \
              docker stop spring-app || true && \
              docker rm spring-app || true && \
