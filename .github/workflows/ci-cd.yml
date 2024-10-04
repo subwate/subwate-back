@@ -3,7 +3,7 @@ name: ci-cd
 on:
   push:
     branches:
-      - SUB-24-GitHub-Actions-workflow
+      - main
   pull_request:
     branches:
       - main
