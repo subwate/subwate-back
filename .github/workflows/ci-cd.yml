@@ -1,0 +1,58 @@
+name: ci-cd
+
+on:
+  push:
+    branches:
+      - SUB-24-GitHub-Actions-workflow
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Execute permission
+        run: chmod +x ./gradlew
+
+      - name: Build
+        run: ./gradlew clean build
+
+      - name: Login Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
+      - name: Build Docker Image
+        run: |
+          docker build -t subwate/spring-app:latest .
+
+      - name: Push Docker Image
+        run: |
+          docker push subwate/spring-app:latest
+
+      - name: Deploy
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "${SSH_PRIVATE_KEY}" > /tmp/ssh_key
+          chmod 600 /tmp/ssh_key
+
+          ssh -i /tmp/ssh_key -o StrictHostKeyChecking=no ubuntu@52.79.216.149 \
+            "docker pull subwate/spring-app:latest && \
+             docker stop spring-app || true && \
+             docker rm spring-app || true && \
+             docker run -d -p 8080:8080 --name spring-app subwate/spring-app:latest"
+
+          rm /tmp/ssh_key
