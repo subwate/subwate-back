@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: subwate-backend
+  doc:
+    swagger-ui:
+      path: /swagger-ui.html
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+kakao:
+  client_id: e7dbc4e23278a48b3f7718232661e39d
+  redirect_uri: http://localhost:8080/callback
