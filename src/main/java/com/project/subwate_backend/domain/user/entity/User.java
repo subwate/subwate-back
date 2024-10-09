@@ -1,6 +1,7 @@
 package com.project.subwate_backend.domain.user.entity;
 
-import com.project.subwate_backend.presentation.user.dto.response.UserInfoDto;
+import com.project.subwate_backend.application.user.dto.UserInfoDto;
+import com.project.subwate_backend.presentation.user.dto.response.UserLoginDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -37,6 +38,15 @@ public class User {
         this.name = name;
         this.nickname = nickname;
         this.oauthDomain = oauthDomain;
+    }
+
+    public static User from(UserLoginDto userLoginDto) {
+        return User.builder()
+                .email(userLoginDto.getEmail())
+                .name(userLoginDto.getName())
+                .nickname(userLoginDto.getNickname())
+                .oauthDomain(userLoginDto.getSocialLoginInfo())
+                .build();
     }
 
     public static User from(UserInfoDto userInfoDto) {

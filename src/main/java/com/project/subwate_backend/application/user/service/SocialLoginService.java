@@ -1,7 +1,7 @@
 package com.project.subwate_backend.application.user.service;
 
-import com.project.subwate_backend.presentation.user.dto.response.UserInfoDto;
+import com.project.subwate_backend.presentation.user.dto.response.UserLoginDto;
 
 public interface SocialLoginService {
-    UserInfoDto login(String code);
+    UserLoginDto login(String code);
 }

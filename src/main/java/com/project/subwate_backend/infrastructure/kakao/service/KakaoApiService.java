@@ -3,28 +3,25 @@ package com.project.subwate_backend.infrastructure.kakao.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.subwate_backend.infrastructure.exception.OauthException;
-import com.project.subwate_backend.presentation.user.dto.response.UserInfoDto;
+import com.project.subwate_backend.presentation.user.dto.response.UserLoginDto;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-@Service
+import static com.project.subwate_backend.common.ResponseCode.*;
+
+@Slf4j
+@Component
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Slf4j
 public class KakaoApiService {
     @Value("${kakao.client_id}")
     String clientId;
@@ -43,30 +40,21 @@ public class KakaoApiService {
 
         String response = sendPostRequest(kakaoUrl, body, null);
 
-        if (response == null) {
-            throw new OauthException("Kakao Login access token을 받아오는데 실패했습니다.", null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
         try {
             JsonNode jsonNode = objectMapper.readTree(response);
             return jsonNode.get("access_token").asText();
         } catch (Exception e) {
-            log.error("Error parsing access token response", e);
-            throw new OauthException("Kakao Login access token을 파싱하는 과정에 문제가 발생했습니다.", e.getCause(), HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new OauthException(OAUTH_ACCESS_TOKEN_GET_FAILED, "access token parsing error", e.getCause());
         }
     }
 
-    public UserInfoDto getUserInfo(String accessToken) {
-        UserInfoDto userInfoDto = new UserInfoDto();
+    public UserLoginDto getUserInfo(String accessToken) {
+        UserLoginDto userLoginDto = new UserLoginDto();
         String reqUrl = "https://kapi.kakao.com/v2/user/me";
 
         log.info(accessToken);
 
         String response = sendPostRequest(reqUrl, null, "Bearer " + accessToken);
-
-        if (response == null) {
-            throw new OauthException("Access token을 사용하여 Kakao 사용자 정보를 받아오는데 실패했습니다.", null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
 
         try {
             JsonNode jsonNode = objectMapper.readTree(response);
@@ -76,13 +64,16 @@ public class KakaoApiService {
             String nickname = properties.path("nickname").asText("");
             String email = kakaoAccount.path("email").asText("");
 
-            userInfoDto.setEmail(email);
-            userInfoDto.setNickname(nickname);
+            if (nickname.isBlank() || email.isBlank()) {
+                throw new OauthException(OAUTH_USER_INFO_GET_FAILED, "value is blank nickname: " + nickname + " email: " + email);
+            }
 
-            return userInfoDto;
+            userLoginDto.setEmail(email);
+            userLoginDto.setNickname(nickname);
+
+            return userLoginDto;
         } catch (Exception e) {
-            log.error("Error occurred while sending request to {}", e.getMessage());
-            throw new OauthException("Kakao Login 사용자 정보를 파싱하는 과정에 문제가 발생했습니다.", e.getCause(), HttpStatus.BAD_REQUEST);
+            throw new OauthException(OAUTH_USER_INFO_GET_FAILED, e.getMessage());
         }
     }
 
@@ -110,15 +101,19 @@ public class KakaoApiService {
             log.info("[KakaoApi] response: {}", response.body());
 
             if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                if (response.body() == null) {
+                    throw new OauthException(OAUTH_DATA_GET_FAILED, "response is null");
+                }
+
                 return response.body();
             } else {
-                log.error("Failed to send request. Response code: {}", response.statusCode());
-                throw new OauthException("Kakao Login 처리 과정에서 문제가 발생했습니다.", HttpStatus.valueOf(response.statusCode()));
+                throw new OauthException(OAUTH_DATA_GET_FAILED, "return status code : " + response.statusCode());
             }
+
         } catch (Exception e) {
             log.error("Error occurred while sending request to {}: {}", url, e.getMessage());
             Thread.currentThread().interrupt();
-            throw new OauthException("Kakao Login 처리 과정에서 문제가 발생했습니다.", e, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new OauthException(OAUTH_DATA_GET_FAILED, "응답에 오류가 발생했습니다: " + e.getMessage());
         }
     }
 }

@@ -1,24 +1,27 @@
 package com.project.subwate_backend.infrastructure.exception;
 
+import com.project.subwate_backend.common.ResponseCode;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
-import org.springframework.http.HttpStatus;
 
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class OauthException extends RuntimeException {
 
-    HttpStatus httpStatus;
+    ResponseCode responseCode;
+    String detailMessage;
 
-    public OauthException(String message, HttpStatus httpStatus) {
-        super(message);
-        this.httpStatus = httpStatus;
+    public OauthException(ResponseCode responseCode, String detailMessage) {
+        super(responseCode.getMessage());
+        this.responseCode = responseCode;
+        this.detailMessage = detailMessage;
     }
 
-    public OauthException(String message, Throwable cause, HttpStatus httpStatus) {
-        super(message, cause);
-        this.httpStatus = httpStatus;
+    public OauthException(ResponseCode responseCode, String detailMessage, Throwable cause) {
+        super(responseCode.getMessage(), cause);
+        this.responseCode = responseCode;
+        this.detailMessage = detailMessage;
     }
 
 }
