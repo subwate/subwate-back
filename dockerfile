@@ -1,9 +1,11 @@
 FROM bellsoft/liberica-openjdk-alpine:17
 
 WORKDIR /app
+COPY . .
 
-ARG JAR_FILE=build/libs/*.jar
-COPY ${JAR_FILE} app.jar
+RUN ./gradlew clean build
+
+RUN cp build/libs/subwate-backend-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
