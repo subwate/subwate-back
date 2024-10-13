@@ -1,4 +1,4 @@
-package com.project.subwate_backend.presentation.subway.dto;
+package com.project.subwate_backend.application.subwayline.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

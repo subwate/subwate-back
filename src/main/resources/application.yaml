@@ -1,8 +1,8 @@
 spring:
+  profiles:
+    active: db
   application:
     name: subwate-backend
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
