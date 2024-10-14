@@ -1,8 +1,14 @@
 spring:
+  profiles:
+    active: db
   application:
     name: subwate-backend
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:}
+    username: ${SPRING_DATASOURCE_USERNAME:}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

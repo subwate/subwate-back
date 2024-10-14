@@ -53,7 +53,7 @@ jobs:
       - name: Deploy
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          DB_URL: ${{ secrets.DB_URL_DEVELOP }}
+          DB_URL_DEVELOP: ${{ secrets.DB_URL_DEVELOP }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
@@ -66,9 +66,10 @@ jobs:
             cd /home/ubuntu/
 
             export COMPOSE_HTTP_TIMEOUT=300
-            export DB_URL=${DB_URL}
-            export DB_USERNAME=${DB_USERNAME}
-            export DB_PASSWORD=${DB_PASSWORD}
+            echo "DB_URL_DEVELOP=${DB_URL_DEVELOP}" > .env
+            echo "DB_USERNAME=${DB_USERNAME}" >> .env
+            echo "DB_PASSWORD=${DB_PASSWORD}" >> .env
+
             docker-compose stop spring-app-develop
             docker container prune -f
             docker image prune -a -f
@@ -79,4 +80,3 @@ jobs:
             docker-compose up -d spring-app-develop
           EOF
 
-          rm /tmp/ssh_key

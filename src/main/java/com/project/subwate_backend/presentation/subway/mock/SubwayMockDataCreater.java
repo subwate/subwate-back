@@ -1,9 +1,9 @@
 package com.project.subwate_backend.presentation.subway.mock;
 
+import com.project.subwate_backend.application.station.dto.StationDto;
 import com.project.subwate_backend.presentation.subway.dto.NotificationDto;
 import com.project.subwate_backend.presentation.subway.dto.RouteBookmarkDto;
 import com.project.subwate_backend.presentation.subway.dto.RouteDto;
-import com.project.subwate_backend.presentation.subway.dto.StationDto;
 import com.project.subwate_backend.presentation.subway.dto.SubwayDto;
 import com.project.subwate_backend.presentation.subway.dto.enums.ArrivalStatus;
 import com.project.subwate_backend.presentation.subway.dto.enums.SubwayType;

@@ -6,7 +6,6 @@ services:
     image: subwate/spring-app:latest
     ports:
       - "8080:8080"
-    env_file: .env
     environment:
       SWAGGER_ENABLED: "false"
       SPRING_DATASOURCE_URL: "${DB_URL}"
