@@ -1,4 +1,4 @@
-package com.project.subwate_backend.presentation.subway.controller;
+package com.project.subwate_backend.presentation.subwayline.controller;
 
 import java.util.List;
 

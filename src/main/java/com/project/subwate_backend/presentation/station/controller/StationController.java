@@ -1,4 +1,4 @@
-package com.project.subwate_backend.presentation.subway.controller;
+package com.project.subwate_backend.presentation.station.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

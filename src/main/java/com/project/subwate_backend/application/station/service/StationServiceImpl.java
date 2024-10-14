@@ -1,4 +1,4 @@
-package com.project.subwate_backend.application.station.service.implement;
+package com.project.subwate_backend.application.station.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.project.subwate_backend.application.station.dto.StationDto;
-import com.project.subwate_backend.application.station.service.StationService;
 import com.project.subwate_backend.common.dto.ResponseDto;
 import com.project.subwate_backend.domain.station.entity.Station;
 import com.project.subwate_backend.infrastructure.station.repository.StationRepository;

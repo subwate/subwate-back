@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.subwate_backend.application.subwayline.dto.SubwayLineDto;
 import com.project.subwate_backend.common.dto.ResponseDto;
 import com.project.subwate_backend.presentation.subway.dto.SubwayDto;
-import com.project.subwate_backend.presentation.subway.dto.SubwayLineDto;
+
 import com.project.subwate_backend.presentation.subway.dto.response.GetSubwayByStationResponseDto;
 import com.project.subwate_backend.presentation.subway.mock.SubwayMockDataCreater;
 

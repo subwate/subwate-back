@@ -1,4 +1,4 @@
-package com.project.subwate_backend.application.subwayline.service.implement;
+package com.project.subwate_backend.application.subwayline.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.project.subwate_backend.application.subwayline.dto.SubwayLineDto;
-import com.project.subwate_backend.application.subwayline.service.SubwayLineService;
 import com.project.subwate_backend.common.dto.ResponseDto;
 import com.project.subwate_backend.domain.subwayline.entity.SubwayLine;
 import com.project.subwate_backend.infrastructure.subwayline.repository.SubwayLineRepository;

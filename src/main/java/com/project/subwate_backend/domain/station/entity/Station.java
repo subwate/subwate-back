@@ -4,10 +4,12 @@ import com.project.subwate_backend.application.station.dto.StationDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Entity
 @Getter
+@AllArgsConstructor
 public class Station {
 
     @Id
