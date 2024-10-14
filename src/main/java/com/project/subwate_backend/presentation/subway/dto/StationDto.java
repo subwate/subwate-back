@@ -2,11 +2,9 @@ package com.project.subwate_backend.presentation.subway.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class StationDto {
     @Schema(description = "역 ID", example = "1001000133")
     @NotNull

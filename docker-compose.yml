@@ -6,8 +6,12 @@ services:
     image: subwate/spring-app:latest
     ports:
       - "8080:8080"
+    env_file: .env
     environment:
-      - SWAGGER_ENABLED=false
+      SWAGGER_ENABLED: "false"
+      SPRING_DATASOURCE_URL: "${DB_URL}"
+      SPRING_DATASOURCE_USERNAME: "${DB_USERNAME}"
+      SPRING_DATASOURCE_PASSWORD: "${DB_PASSWORD}"
 
   spring-app-develop:
     build:
@@ -16,5 +20,9 @@ services:
     image: subwate/spring-app-develop:latest
     ports:
       - "8081:8080"
+    env_file: .env
     environment:
-      - SWAGGER_ENABLED=true
+      SWAGGER_ENABLED: "true"
+      SPRING_DATASOURCE_URL: "${DB_URL_DEVELOP}"
+      SPRING_DATASOURCE_USERNAME: "${DB_USERNAME}"
+      SPRING_DATASOURCE_PASSWORD: "${DB_PASSWORD}"
