@@ -1,11 +1,28 @@
 spring:
   application:
     name: subwate-backend
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-    enabled: ${SWAGGER_ENABLED:true}
-  api-docs:
-    enabled: ${SWAGGER_ENABLED:true}
+  doc:
+    swagger-ui:
+      path: /swagger-ui.html
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${url}
+    username: ${username}
+    password: ${password}
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_OPTION:none}
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      database-platform: org.hibernate.dialect.MySQLDialect
+
+
+jwt:
+  secret_key: ${jwt_key}
+
+kakao:
+  client_id: ${kakao_client_id}
+  redirect_uri: http://localhost:8080/api/v1/auth/kakao/callback
+
