@@ -29,6 +29,7 @@ jobs:
             echo password=${{ secrets.DB_PASSWORD }} >> src/main/resources/keys.properties
             echo jwt_key=${{ secrets.JWT_KEY }} >> src/main/resources/keys.properties
             echo kakao_client_id=${{ secrets.KAKAO_CLIENT_ID }} >> src/main/resources/keys.properties
+            echo seoul_data_api_key=${{ secrets.SEOUL_DATA_API_KEY }} >> src/main/resources/keys.properties
 
       - name: Execute Permission
         run: chmod +x ./gradlew

@@ -61,20 +61,29 @@ jobs:
       - name: Deploy
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DB_URL_DEVELOP: ${{ secrets.DB_URL_DEVELOP }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
           echo "${SSH_PRIVATE_KEY}" > /tmp/ssh_key
           chmod 600 /tmp/ssh_key
 
-          ssh -i /tmp/ssh_key -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=10 ubuntu@43.200.133.172 << EOF
-            cd /home/ubuntu/subwate-backend/
+          scp -i /tmp/ssh_key -o StrictHostKeyChecking=no docker-compose.yml ubuntu@43.200.133.172:/home/ubuntu/
+
+          ssh -i /tmp/ssh_key -o StrictHostKeyChecking=no ubuntu@43.200.133.172 << EOF
+            cd /home/ubuntu/
+
             export COMPOSE_HTTP_TIMEOUT=300
+            echo "DB_URL=${DB_URL}" > .env
+            echo "DB_USERNAME=${DB_USERNAME}" >> .env
+            echo "DB_PASSWORD=${DB_PASSWORD}" >> .env
+
             docker-compose stop spring-app
             docker container prune -f
             docker image prune -a -f
             docker volume prune -f
             docker system prune -a -f
+            
             docker-compose pull spring-app
             docker-compose up -d spring-app
           EOF
-
-          rm /tmp/ssh_key
