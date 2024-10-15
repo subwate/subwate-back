@@ -1,9 +1,9 @@
 package com.project.subwate_backend.presentation.subway.mock;
 
+import com.project.subwate_backend.application.station.dto.StationDto;
 import com.project.subwate_backend.presentation.subway.dto.NotificationDto;
 import com.project.subwate_backend.presentation.subway.dto.RouteBookmarkDto;
 import com.project.subwate_backend.presentation.subway.dto.RouteDto;
-import com.project.subwate_backend.presentation.subway.dto.StationDto;
 import com.project.subwate_backend.presentation.subway.dto.SubwayDto;
 import com.project.subwate_backend.presentation.subway.dto.enums.ArrivalStatus;
 import com.project.subwate_backend.presentation.subway.dto.enums.SubwayType;
@@ -17,8 +17,8 @@ public class SubwayMockDataCreater {
     public static SubwayDto createMockSubway() {
 
         StationDto stationDto = new StationDto();
-        stationDto.setStationId((long) 1001000133);
-        stationDto.setStationName("서울");
+        stationDto.setId((long) 1001000133);
+        stationDto.setName("서울");
 
         SubwayDto subwayDto = new SubwayDto();
         subwayDto.setSubwayLineId((long) 1001);
@@ -37,8 +37,8 @@ public class SubwayMockDataCreater {
 
     public static StationDto createMockStation() {
         StationDto stationDto = new StationDto();
-        stationDto.setStationId((long) 1001000134);
-        stationDto.setStationName("서울");
+        stationDto.setId((long) 1001000134);
+        stationDto.setName("서울");
         stationDto.setSubwayLineId((long) 1001);
         stationDto.setLatitude(37.55315);
         stationDto.setLongitude(126.972533);

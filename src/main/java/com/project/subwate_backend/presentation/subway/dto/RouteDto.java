@@ -2,6 +2,8 @@ package com.project.subwate_backend.presentation.subway.dto;
 
 import java.util.List;
 
+import com.project.subwate_backend.application.station.dto.StationDto;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 

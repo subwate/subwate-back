@@ -26,3 +26,6 @@ kakao:
   client_id: ${kakao_client_id}
   redirect_uri: http://localhost:8080/api/v1/auth/kakao/callback
 
+api:
+  key:
+    seoul_data: ${seoul_data_api_key}
