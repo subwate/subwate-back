@@ -22,6 +22,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Create keys.properties file
+        run: |
+          echo url=${{ secrets.DB_URL }} > src/main/resources/keys.properties
+          echo username=${{ secrets.DB_USERNAME }} >> src/main/resources/keys.properties
+          echo password=${{ secrets.DB_PASSWORD }} >> src/main/resources/keys.properties
+          echo jwt_key=${{ secrets.JWT_KEY }} >> src/main/resources/keys.properties
+          echo kakao_client_id=${{ secrets.KAKAO_CLIENT_ID }} >> src/main/resources/keys.properties
+
       - name: Execute Permission
         run: chmod +x ./gradlew
 
