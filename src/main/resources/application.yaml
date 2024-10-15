@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: db
+  config:
+    import: "classpath:keys.properties" 
   application:
     name: subwate-backend
   datasource:
@@ -15,3 +17,6 @@ springdoc:
     enabled: ${SWAGGER_ENABLED:true}
   api-docs:
     enabled: ${SWAGGER_ENABLED:true}
+
+api:
+  seoul_data_api_key: ${seoul_data_api_key}
