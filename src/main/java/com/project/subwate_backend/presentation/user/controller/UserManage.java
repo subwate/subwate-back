@@ -1,5 +1,6 @@
 package com.project.subwate_backend.presentation.user.controller;
 
+
 import com.project.subwate_backend.application.user.dto.UserInfoDto;
 import com.project.subwate_backend.application.user.service.UserManageService;
 import com.project.subwate_backend.common.ResponseCode;
@@ -39,6 +40,7 @@ public class UserManage {
 
     @Operation(summary = "유저 프로필 이미지 수정", description = "[JWT 토큰 헤더 필요] 인증이 완료 된 유저의 JWT 토큰 내부의 userId를 통한 유저 프로필 이미지 변경",
             security = @SecurityRequirement(name = "bearerAuth"))
+
     @PostMapping("/me/image")
     public ResponseDto<UserResponseDto> updateUserProfileImage(@Parameter(description = "변경할 유저 프로필 이미지") @RequestParam String image) {
 
