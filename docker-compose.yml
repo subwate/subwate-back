@@ -1,5 +1,5 @@
 services:
-  spring-app:
+  subwate-server:
     build:
       context: .
       dockerfile: dockerfile
@@ -9,7 +9,7 @@ services:
     environment:
       - SWAGGER_ENABLED=false
 
-  spring-app-develop:
+  subwate-server-dev:
     build:
       context: .
       dockerfile: dockerfile
