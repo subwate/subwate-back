@@ -33,6 +33,7 @@ jobs:
       - name: Print keys.properties file content
         run: cat src/main/resources/keys.properties
 
+
       - name: Execute Permission
         run: chmod +x ./gradlew
 
