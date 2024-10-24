@@ -30,10 +30,6 @@ jobs:
             echo jwt_key=${{ secrets.JWT_KEY }} >> src/main/resources/keys.properties
             echo kakao_client_id=${{ secrets.KAKAO_CLIENT_ID }} >> src/main/resources/keys.properties
 
-      - name: Print keys.properties file content
-        run: cat src/main/resources/keys.properties
-
-
       - name: Execute Permission
         run: chmod +x ./gradlew
 
@@ -48,11 +44,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t subwate/spring-app-develop:latest .
+          docker build -t subwatedev/subwate-server-dev:latest .
 
       - name: Push Docker Image
         run: |
-          docker push subwate/spring-app-develop:latest
+          docker push subwatedev/subwate-server-dev:latest
 
   deploy:
     runs-on: ubuntu-latest

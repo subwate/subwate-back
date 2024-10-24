@@ -44,11 +44,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t subwate/spring-app:latest .
+          docker build -t subwatedev/subwate-server:latest .
 
       - name: Push Docker Image
         run: |
-          docker push subwate/spring-app:latest
+          docker push subwatedev/subwate-server:latest
 
   deploy:
     runs-on: ubuntu-latest
