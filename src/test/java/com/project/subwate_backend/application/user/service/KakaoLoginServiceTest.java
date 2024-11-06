@@ -56,7 +56,7 @@ class KakaoLoginServiceTest {
 
     @Test
     @DisplayName("[카카오 로그인]회원가입되지 않은 사용자 카카오 로그인 시 가입되지 않은 사용자 예외 발생")
-    void givenUnregisterUser_whenKakaoLoign_thenThrowUnregisteredUserException() {
+    void givenUnregisterUser_whenKakaoLogin_thenThrowUnregisteredUserException() {
         //given
         String code = "mockCode";
 
@@ -74,7 +74,7 @@ class KakaoLoginServiceTest {
 
     @Test
     @DisplayName("[카카오 로그인]회원가입 된 사용자 카카오 로그인 시 유저 정보 및 토큰 발행")
-    void givenRegisteredUser_whenKakoLoin_ThenReturnUserInfo() {
+    void givenRegisteredUser_whenKakaoLogin_ThenReturnUserInfo() {
         //given
         String code = "mockCode";
         User mockUser = User.from(mockUserLoginDto);

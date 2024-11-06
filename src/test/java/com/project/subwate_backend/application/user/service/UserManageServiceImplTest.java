@@ -59,6 +59,9 @@ class UserManageServiceImplTest {
         UserResponseDto result = userManageService.join(userInfoDto);
 
         // then
+        assertEquals(result.getEmail(), userInfoDto.getEmail());
+        assertEquals(result.getNickname(), userInfoDto.getNickname());
+        assertEquals(result.getName(), userInfoDto.getName());
         verify(userRepository, times(1)).save(any(User.class));
         verify(responseMapper, times(1)).toUserResponseDto(any(User.class));
     }
@@ -77,7 +80,7 @@ class UserManageServiceImplTest {
         Exception exception = assertThrows(DuplicateUserException.class, () -> userManageService.join(userInfoDto));
 
         // then
-        assertTrue(exception instanceof DuplicateUserException);
+        assertInstanceOf(DuplicateUserException.class, exception);
         verify(userRepository, times(1)).existsByEmail(userInfoDto.getEmail());
         verify(userRepository, never()).save(any(User.class));
     }
@@ -96,7 +99,7 @@ class UserManageServiceImplTest {
         Exception exception = assertThrows(DuplicateUserException.class, () -> userManageService.join(userInfoDto));
 
         // then
-        assertTrue(exception instanceof DuplicateUserException);
+        assertInstanceOf(DuplicateUserException.class, exception);
         verify(userRepository, times(1)).existsByNickname(userInfoDto.getNickname());
         verify(userRepository, never()).save(any(User.class));
     }
