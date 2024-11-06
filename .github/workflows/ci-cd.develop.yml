@@ -44,11 +44,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t subwate/spring-app-develop:latest .
+          docker build -t subwatedev/subwate-server-dev:latest .
 
       - name: Push Docker Image
         run: |
-          docker push subwate/spring-app-develop:latest
+          docker push subwatedev/subwate-server-dev:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -65,16 +65,15 @@ jobs:
           echo "${SSH_PRIVATE_KEY}" > /tmp/ssh_key
           chmod 600 /tmp/ssh_key
 
-          ssh -i /tmp/ssh_key -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=10 ubuntu@43.200.133.172 << EOF
-            cd /home/ubuntu/subwate-backend/
+          ssh -i /tmp/ssh_key -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=10 ec2-user@${{ secrets.SERVER_IP }} << EOF
             export COMPOSE_HTTP_TIMEOUT=300
-            docker-compose stop spring-app-develop
+            docker-compose stop subwate-server-dev
             docker container prune -f
             docker image prune -a -f
             docker volume prune -f
             docker system prune -a -f
-            docker-compose pull spring-app-develop
-            docker-compose up -d spring-app-develop
+            docker-compose pull subwate-server-dev
+            docker-compose up -d subwate-server-dev
           EOF
 
           rm /tmp/ssh_key
