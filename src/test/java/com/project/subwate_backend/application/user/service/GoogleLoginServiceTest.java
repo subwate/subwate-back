@@ -3,7 +3,7 @@ package com.project.subwate_backend.application.user.service;
 import com.project.subwate_backend.application.exception.UnregisteredUserException;
 import com.project.subwate_backend.common.mapper.ResponseMapper;
 import com.project.subwate_backend.domain.user.entity.User;
-import com.project.subwate_backend.infrastructure.kakao.service.KakaoApiService;
+import com.project.subwate_backend.infrastructure.google.service.GoogleApiService;
 import com.project.subwate_backend.infrastructure.security.JwtTokenProvider;
 import com.project.subwate_backend.infrastructure.user.repository.UserRepository;
 import com.project.subwate_backend.presentation.user.dto.response.UserLoginDto;
@@ -20,17 +20,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
-@DisplayName("카카오 로그인 서비스 테스트")
-class KakaoLoginServiceTest {
-
-    private KakaoLoginService kakaoLoginService;
+@DisplayName("구글 로그인 서비스 테스트")
+class GoogleLoginServiceTest {
+    private GoogleLoginService googleLoginService;
 
     @MockBean
-    private KakaoApiService kakaoApiService;
+    private GoogleApiService googleApiService;
 
     @MockBean
     private ResponseMapper responseMapper;
@@ -45,27 +43,27 @@ class KakaoLoginServiceTest {
 
     @BeforeEach
     void setUp() {
-        kakaoLoginService = new KakaoLoginService(kakaoApiService, userRepository, jwtTokenProvider, responseMapper);
+        googleLoginService = new GoogleLoginService(googleApiService, userRepository, jwtTokenProvider, responseMapper);
 
         mockUserLoginDto = new UserLoginDto();
         mockUserLoginDto.setEmail("test@example.com");
         mockUserLoginDto.setName("Test User");
         mockUserLoginDto.setNickname("TestNickname");
-        mockUserLoginDto.setSocialLoginInfo("kakao");
+        mockUserLoginDto.setSocialLoginInfo("google");
     }
 
     @Test
-    @DisplayName("[카카오 로그인]회원가입되지 않은 사용자 카카오 로그인 시 가입되지 않은 사용자 예외 발생")
-    void givenUnregisterUser_whenKakaoLogin_thenThrowUnregisteredUserException() {
+    @DisplayName("[구글 로그인]회원가입되지 않은 사용자 구글 로그인 시 가입되지 않은 사용자 예외 발생")
+    void givenUnregisterUser_whenGoogleLogin_thenThrowUnregisteredUserException() {
         //given
         String code = "mockCode";
 
-        when(kakaoApiService.getAccessToken(code)).thenReturn("mockAccessToken");
-        when(kakaoApiService.getUserInfo(anyString())).thenReturn(mockUserLoginDto);
+        when(googleApiService.getAccessToken(code)).thenReturn("mockAccessToken");
+        when(googleApiService.getUserInfo(anyString())).thenReturn(mockUserLoginDto);
 
         //when
         UnregisteredUserException exception = assertThrows(UnregisteredUserException.class, () -> {
-            kakaoLoginService.login(code);
+            googleLoginService.login(code);
         });
 
         //then
@@ -73,8 +71,8 @@ class KakaoLoginServiceTest {
     }
 
     @Test
-    @DisplayName("[카카오 로그인]회원가입 된 사용자 카카오 로그인 시 유저 정보 및 토큰 발행")
-    void givenRegisteredUser_whenKakaoLogin_ThenReturnUserInfo() {
+    @DisplayName("[구글 로그인]회원가입 된 사용자 구글 로그인 시 유저 정보 및 토큰 발행")
+    void givenRegisteredUser_whenGoogleLogin_ThenReturnUserInfo() {
         //given
         String code = "mockCode";
         User mockUser = User.from(mockUserLoginDto);
@@ -82,19 +80,19 @@ class KakaoLoginServiceTest {
         userRepository.save(mockUser);
 
         UserLoginDto expectedResponseDto = new UserLoginDto();
-        expectedResponseDto.setEmail("test@example.com");
+        expectedResponseDto.setEmail("test@google.com");
         expectedResponseDto.setAccessToken("mockAccessToken");
         expectedResponseDto.setRefreshToken("mockRefreshToken");
 
 
-        when(kakaoApiService.getAccessToken(anyString())).thenReturn("mockAccessToken");
-        when(kakaoApiService.getUserInfo(anyString())).thenReturn(mockUserLoginDto);
+        when(googleApiService.getAccessToken(anyString())).thenReturn("mockAccessToken");
+        when(googleApiService.getUserInfo(anyString())).thenReturn(mockUserLoginDto);
         when(responseMapper.toUserLoginDto(mockUser)).thenReturn(expectedResponseDto);
         when(jwtTokenProvider.createToken(mockUserLoginDto.getEmail(), mockUser.getId())).thenReturn("mockAccessToken");
         when(jwtTokenProvider.createRefreshToken(mockUserLoginDto.getEmail())).thenReturn("mockRefreshToken");
 
         //when
-        UserLoginDto result = kakaoLoginService.login(code);
+        UserLoginDto result = googleLoginService.login(code);
 
         // then
         assertNotNull(result);

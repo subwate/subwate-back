@@ -22,6 +22,8 @@ public class SocialLoginServiceFactory {
     public SocialLoginService getSocialLoginService(String serviceName) {
         if (serviceName.equalsIgnoreCase("kakao")) {
             return socialLoginServices.get("KakaoLoginService");
+        } else if (serviceName.equalsIgnoreCase("google")) {
+            return socialLoginServices.get("GoogleLoginService");
         }
 
         throw new IllegalArgumentException("Unknown serviceName: " + serviceName);
