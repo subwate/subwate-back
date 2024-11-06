@@ -26,3 +26,8 @@ kakao:
   client_id: ${kakao_client_id}
   redirect_uri: http://localhost:8080/api/v1/auth/kakao/callback
 
+google:
+  client_id: ${google_client_id}
+  client_secret: ${google_client_secret}
+  redirect_url: http://localhost:8080/api/v1/auth/google/callback
+

@@ -35,7 +35,7 @@ public class SocialLogin {
             })
     @GetMapping("/{provider}/callback")
     public ResponseDto<UserLoginDto> socialLogin(@PathVariable String provider, @RequestParam String code) {
-        log.info("socialLogin provider : {}", provider);
+        log.info("socialLogin provider : {} {}", provider, code);
         SocialLoginService socialLoginService = socialLoginServiceFactory.getSocialLoginService(provider);
 
         return ResponseDto.of(ResponseCode.LOGIN_SUCCESS, socialLoginService.login(code));
