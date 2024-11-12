@@ -1,0 +1,15 @@
+package com.project.subwate_backend.friend.presentation.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public class FriendDto {
+    
+    private Long friendId;
+    
+    private String nickName;
+
+    private String imageUrl;
+}
