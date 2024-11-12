@@ -1,10 +1,10 @@
 package com.project.subwate_backend.presentation.friend.dto;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 
 @Getter

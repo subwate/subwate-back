@@ -1,11 +1,11 @@
 package com.project.subwate_backend.common.exception;
 
-import com.project.subwate_backend.application.exception.DuplicateUserException;
-import com.project.subwate_backend.application.exception.UnregisteredUserException;
-import com.project.subwate_backend.common.ResponseCode;
+import com.project.subwate_backend.user.application.exception.DuplicateUserException;
+import com.project.subwate_backend.user.application.exception.UnregisteredUserException;
+import com.project.subwate_backend.user.application.UserResponseCode;
 import com.project.subwate_backend.common.dto.ResponseDto;
-import com.project.subwate_backend.infrastructure.exception.OauthException;
-import com.project.subwate_backend.presentation.user.dto.response.UserLoginDto;
+import com.project.subwate_backend.user.infrastructure.exception.OauthException;
+import com.project.subwate_backend.user.presentation.dto.response.UserLoginDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -32,20 +32,20 @@ public class GlobalExceptionHandler {
         log.error(ex.getMessage());
         log.error("[Details] " + ex.getDetailMessage());
 
-        return ResponseDto.of(ex.getResponseCode(), null);
+        return ResponseDto.of(ex.getUserResponseCode(), null);
     }
 
     @ExceptionHandler(UnregisteredUserException.class)
     public ResponseDto<UserLoginDto> handleOauthException(UnregisteredUserException ex) {
         log.error(ex.getMessage());
 
-        return ResponseDto.of(ex.getResponseCode(), ex.getUserLoginDto());
+        return ResponseDto.of(ex.getUserResponseCode(), ex.getUserLoginDto());
     }
 
     @ExceptionHandler(DuplicateUserException.class)
     public ResponseDto<String> handleDuplicateUserException(DuplicateUserException ex) {
         log.error(ex.getMessage());
-        return ResponseDto.of(ex.getResponseCode(), null);
+        return ResponseDto.of(ex.getUserResponseCode(), null);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -59,6 +59,6 @@ public class GlobalExceptionHandler {
                                         .ofNullable(fieldError.getDefaultMessage())
                                         .orElse(" ")));
 
-        return ResponseDto.of(ResponseCode.VALID_CHECK_FAILED, errors);
+        return ResponseDto.of(UserResponseCode.VALID_CHECK_FAILED, errors);
     }
 }
