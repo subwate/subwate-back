@@ -1,7 +1,6 @@
 package com.project.subwate_backend.presentation.subway.dto.response;
 
 import com.project.subwate_backend.presentation.subway.dto.SubwayDto;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,12 +1,13 @@
 package com.project.subwate_backend.application.user.service;
 
-import com.project.subwate_backend.application.exception.UnregisteredUserException;
+import com.project.subwate_backend.user.application.exception.UnregisteredUserException;
 import com.project.subwate_backend.common.mapper.ResponseMapper;
-import com.project.subwate_backend.domain.user.entity.User;
-import com.project.subwate_backend.infrastructure.kakao.service.KakaoApiService;
-import com.project.subwate_backend.infrastructure.security.JwtTokenProvider;
-import com.project.subwate_backend.infrastructure.user.repository.UserRepository;
-import com.project.subwate_backend.presentation.user.dto.response.UserLoginDto;
+import com.project.subwate_backend.user.domain.entity.User;
+import com.project.subwate_backend.user.infrastructure.kakao.service.KakaoApiService;
+import com.project.subwate_backend.common.security.JwtTokenProvider;
+import com.project.subwate_backend.user.infrastructure.repository.UserRepository;
+import com.project.subwate_backend.user.application.service.KakaoLoginService;
+import com.project.subwate_backend.user.presentation.dto.response.UserLoginDto;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,15 +1,12 @@
 package com.project.subwate_backend.presentation.subway.mock;
 
-import com.project.subwate_backend.presentation.subway.dto.NotificationDto;
-import com.project.subwate_backend.presentation.subway.dto.RouteBookmarkDto;
-import com.project.subwate_backend.presentation.subway.dto.RouteDto;
-import com.project.subwate_backend.presentation.subway.dto.StationDto;
-import com.project.subwate_backend.presentation.subway.dto.SubwayDto;
+import com.project.subwate_backend.presentation.subway.dto.*;
 import com.project.subwate_backend.presentation.subway.dto.enums.ArrivalStatus;
 import com.project.subwate_backend.presentation.subway.dto.enums.SubwayType;
 import com.project.subwate_backend.presentation.subway.dto.enums.UpDownClassification;
-import java.util.List;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class SubwayMockDataCreater {
