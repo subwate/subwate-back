@@ -1,7 +1,7 @@
 package com.project.subwate_backend.common.dto;
 
 
-import com.project.subwate_backend.common.ResponseCode;
+import com.project.subwate_backend.user.application.UserResponseCode;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +17,8 @@ public class ResponseDto<D> {
     String message;
     D data;
 
-    public static <D> ResponseDto<D> of(ResponseCode responseCode, D data) {
-        return new ResponseDto<>(responseCode.getHttpStatus(), responseCode.getMessage(), data);
+    public static <D> ResponseDto<D> of(UserResponseCode userResponseCode, D data) {
+        return new ResponseDto<>(userResponseCode.getHttpStatus(), userResponseCode.getMessage(), data);
     }
 }
 

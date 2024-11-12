@@ -3,7 +3,6 @@ package com.project.subwate_backend.presentation.subway.dto;
 import com.project.subwate_backend.presentation.subway.dto.enums.ArrivalStatus;
 import com.project.subwate_backend.presentation.subway.dto.enums.SubwayType;
 import com.project.subwate_backend.presentation.subway.dto.enums.UpDownClassification;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,9 +1,7 @@
 package com.project.subwate_backend.presentation.community.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
 import java.util.List;

@@ -1,8 +1,8 @@
 package com.project.subwate_backend.common.mapper;
 
-import com.project.subwate_backend.domain.user.entity.User;
-import com.project.subwate_backend.presentation.user.dto.response.UserLoginDto;
-import com.project.subwate_backend.presentation.user.dto.response.UserResponseDto;
+import com.project.subwate_backend.user.domain.entity.User;
+import com.project.subwate_backend.user.presentation.dto.response.UserLoginDto;
+import com.project.subwate_backend.user.presentation.dto.response.UserResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
