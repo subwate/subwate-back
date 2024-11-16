@@ -1,0 +1,34 @@
+package com.project.subwate_backend.subway.presentation.controller;
+
+import com.project.subwate_backend.common.dto.ResponseDto;
+import com.project.subwate_backend.subway.presentation.dto.response.StartRideResponseDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+@Tag(name = "subway-ride")
+@RestController
+@RequestMapping("api/v1/ride")
+public class RideController {
+
+    @Operation(summary = "탑승 시작 설정")
+    @PostMapping("/route/{routeId}")
+    public ResponseDto<StartRideResponseDto> startRide(
+            @Parameter(description = "경로 Id", example = "123") @PathVariable String routeId) {
+
+        StartRideResponseDto responseDto = new StartRideResponseDto();
+        responseDto.setExpectedExitTime(600);
+
+        return ResponseDto.of(HttpStatus.OK, "탑승을 시작했습니다.", responseDto);
+    }
+
+    @Operation(summary = "탑승 시작 설정 취소")
+    @DeleteMapping("/route/{routeId}")
+    public ResponseDto<Void> cancelRide(
+            @Parameter(description = "경로 ID", example = "123") @PathVariable String routeId) {
+
+        return ResponseDto.of(HttpStatus.OK, "탑승을 취소했습니다.", null);
+    }
+}
